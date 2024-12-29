@@ -1,0 +1,51 @@
+Y,Phenotype,null,OR
+In-hospital Mortality,0,,1
+In-hospital Mortality,1,,1.51 (1.13 to 2.02)
+In-hospital Mortality,2,,2.62 (1.84 to 3.73)
+In-hospital Mortality,3,,0.63 (0.23 to 1.71)
+In-hospital Mortality,4,,4.92 (2.86 to 8.46)
+ICU Stay,0,,1
+ICU Stay,1,,1.53 (1.34 to 1.74)
+ICU Stay,2,,2.24 (1.9 to 2.66)
+ICU Stay,3,,1.49 (1.1 to 2.01)
+ICU Stay,4,,2.71 (1.96 to 3.74)
+Mechanical ventilation,0,,1
+Mechanical ventilation,1,,1.47 (1.32 to 1.65)
+Mechanical ventilation,2,,2.47 (2.15 to 2.83)
+Mechanical ventilation,3,,1.41 (1.09 to 1.83)
+Mechanical ventilation,4,,2.94 (2.26 to 3.83)
+Cardiac Complications,0,,1
+Cardiac Complications,1,,1.26 (1.17 to 1.36)
+Cardiac Complications,2,,1.45 (1.29 to 1.62)
+Cardiac Complications,3,,1.36 (1.14 to 1.62)
+Cardiac Complications,4,,1.55 (1.22 to 1.95)
+Stroke,0,,1
+Stroke,1,,1.66 (0.98 to 2.82)
+Stroke,2,,2.36 (1.19 to 4.69)
+Stroke,3,,2.24 (0.79 to 6.33)
+Stroke,4,,1.15 (0.16 to 8.4)
+Major Adverse Cardiac Events,0,,1
+Major Adverse Cardiac Events,1,,1.26 (1.16 to 1.36)
+Major Adverse Cardiac Events,2,,1.44 (1.29 to 1.61)
+Major Adverse Cardiac Events,3,,1.37 (1.15 to 1.63)
+Major Adverse Cardiac Events,4,,1.56 (1.23 to 1.96)
+Acute Kidney Injury,0,,1
+Acute Kidney Injury,1,,0.87 (0.82 to 0.93)
+Acute Kidney Injury,2,,1.09 (0.99 to 1.2)
+Acute Kidney Injury,3,,1.45 (1.27 to 1.66)
+Acute Kidney Injury,4,,1.32 (1.08 to 1.6)
+Continuous Renal Replacement Therapy,0,,1
+Continuous Renal Replacement Therapy,1,,0.44 (0.34 to 0.56)
+Continuous Renal Replacement Therapy,2,,1.1 (0.83 to 1.45)
+Continuous Renal Replacement Therapy,3,,1.23 (0.82 to 1.85)
+Continuous Renal Replacement Therapy,4,,1.11 (0.61 to 2.03)
+Acute Liver Injury,0,,1
+Acute Liver Injury,1,,0.81 (0.75 to 0.87)
+Acute Liver Injury,2,,1.22 (1.1 to 1.35)
+Acute Liver Injury,3,,0.93 (0.78 to 1.12)
+Acute Liver Injury,4,,1.32 (1.06 to 1.64)
+Postoperative Pulmonary Complications,0,,1
+Postoperative Pulmonary Complications,1,,1.15 (1.09 to 1.22)
+Postoperative Pulmonary Complications,2,,1.63 (1.51 to 1.76)
+Postoperative Pulmonary Complications,3,,1.29 (1.14 to 1.47)
+Postoperative Pulmonary Complications,4,,1.63 (1.38 to 1.92)
