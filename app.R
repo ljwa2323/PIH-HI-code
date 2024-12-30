@@ -69,8 +69,9 @@ names(ds_OR)[4] <- "OR (95% CI)"
 
 aggregate_data <- read.csv("./www/huaxi_traj_7_to_4_all.csv")
 
-default_mbp <- c(80, 70, 60, 65, 67,66, 64,66,66,67,66,66,66)
-default_mbp <- c(default_mbp, rep(NA, 13 - length(default_mbp)))  # 尾部填充NA
+# 更新 default_mbp 的定义，使用新的 class 1 数据作为默认值
+default_mbp <- c(80, 70, 60, 65, 67, 66, 64, 66, 66, 67, 66, 66, 66)
+default_mbp <- c(default_mbp, rep(NA, 13 - length(default_mbp)))  # 确保长度为13
 
 # View(ds_OR)
 # Define UI
@@ -204,8 +205,29 @@ ui <- fluidPage(
             HTML("<br>"),
             actionButton("submit_new", "Submit"),
             actionButton("clear_new", "Clear")
+            # HTML("<br><br>"),
+            # div(style = "display: flex; flex-direction: column; gap: 10px;",
+            #     actionButton("case1", "Case 1 (Phenotype 0)", style = "width: 100%; background-color: #B0B0B0; color: white;"),
+            #     actionButton("case2", "Case 2 (Phenotype 1)", style = "width: 100%; background-color: #92A8D1; color: white;"),
+            #     actionButton("case3", "Case 3 (Phenotype 2)", style = "width: 100%; background-color: #74777C; color: white;"),
+            #     actionButton("case4", "Case 4 (Phenotype 3)", style = "width: 100%; background-color: #D2C19E; color: white;"),
+            #     actionButton("case5", "Case 5 (Phenotype 4)", style = "width: 100%; background-color: #FF6F61; color: white;")
+            # )
           ),
           mainPanel(
+            HTML("<p style='font-weight: bold; margin-bottom: 15px;'>Example Cases</p>"),  # 添加标题
+            div(style = "display: flex; flex-direction: row; justify-content: space-between; gap: 10px; margin-bottom: 20px;",
+              actionButton("case1", "Case 1\n(Phenotype 0)", 
+                style = "width: 19%; white-space: pre-line; background-color: #B0B0B0; color: white;"),
+              actionButton("case2", "Case 2\n(Phenotype 1)", 
+                style = "width: 19%; white-space: pre-line; background-color: #92A8D1; color: white;"),
+              actionButton("case3", "Case 3\n(Phenotype 2)", 
+                style = "width: 19%; white-space: pre-line; background-color: #74777C; color: white;"),
+              actionButton("case4", "Case 4\n(Phenotype 3)", 
+                style = "width: 19%; white-space: pre-line; background-color: #D2C19E; color: white;"),
+              actionButton("case5", "Case 5\n(Phenotype 4)", 
+                style = "width: 19%; white-space: pre-line; background-color: #FF6F61; color: white;")
+            ),
             HTML("<p style='font-weight: bold;'>Prediction Result</p>"),
             plotOutput("pred_plot", width = "850px", height = "500px"),
             HTML("<br>"),
@@ -228,6 +250,19 @@ ui <- fluidPage(
             actionButton("clear", "Clear")
           ),
           mainPanel(
+            HTML("<p style='font-weight: bold; margin-bottom: 15px;'>Example Cases</p>"),  # 添加标题
+            div(style = "display: flex; flex-direction: row; justify-content: space-between; gap: 10px; margin-bottom: 20px;",
+              actionButton("class0", "Case 1\n(Phenotype 0)", 
+                style = "width: 19%; white-space: pre-line; background-color: #B0B0B0; color: white;"),
+              actionButton("class1", "Case 2\n(Phenotype 1)", 
+                style = "width: 19%; white-space: pre-line; background-color: #92A8D1; color: white;"),
+              actionButton("class2", "Case 3\n(Phenotype 2)", 
+                style = "width: 19%; white-space: pre-line; background-color: #74777C; color: white;"),
+              actionButton("class3", "Case 4\n(Phenotype 3)", 
+                style = "width: 19%; white-space: pre-line; background-color: #D2C19E; color: white;"),
+              actionButton("class4", "Case 5\n(Phenotype 4)", 
+                style = "width: 19%; white-space: pre-line; background-color: #FF6F61; color: white;")
+            ),
             HTML("<p style='font-weight: bold;'>Trajectory Plot</p>"),
             textOutput("classification"),
             plotOutput("plot_mbp", width = "850px"),
@@ -249,18 +284,18 @@ ui <- fluidPage(
 
       tabPanel(title = HTML("<span style='font-size: 18px; color: #4472C4; font-weight: bold;'>Trajectory References</span>"),  # 放大 Trajectory References tab 的标题
         sidebarPanel(
-          div(style = "display: flex; flex-direction: column; gap: 10px; margin: 10px;",
-            HTML("<p style='color: #4472C4; font-weight: bold; font-size: 14px;'>Select Phenotype:</p>"),
-            actionButton("phenotype0", "Phenotype 0", 
-              style = "width: 100%; margin: 0; background-color: #B0B0B0; color: white;"),
-            actionButton("phenotype1", "Phenotype 1", 
-              style = "width: 100%; margin: 0; background-color: #92A8D1; color: white;"),
-            actionButton("phenotype2", "Phenotype 2", 
-              style = "width: 100%; margin: 0; background-color: #74777C; color: white;"),
-            actionButton("phenotype3", "Phenotype 3", 
-              style = "width: 100%; margin: 0; background-color: #D2C19E; color: white;"),
-            actionButton("phenotype4", "Phenotype 4", 
-              style = "width: 100%; margin: 0; background-color: #FF6F61; color: white;")
+          div(style = "display: flex; flex-direction: column; gap: 10px; margin: 10px; text-align: center;",
+              HTML("<p style='color: #4472C4; font-weight: bold; font-size: 14px; text-align: left;'>Select Phenotype:</p>"),
+              actionButton("phenotype0", "Phenotype 0", 
+                  style = "width: 60%; margin: 0 auto; background-color: #B0B0B0; color: white;"),
+              actionButton("phenotype1", "Phenotype 1", 
+                  style = "width: 60%; margin: 0 auto; background-color: #92A8D1; color: white;"),
+              actionButton("phenotype2", "Phenotype 2", 
+                  style = "width: 60%; margin: 0 auto; background-color: #74777C; color: white;"),
+              actionButton("phenotype3", "Phenotype 3", 
+                  style = "width: 60%; margin: 0 auto; background-color: #D2C19E; color: white;"),
+              actionButton("phenotype4", "Phenotype 4", 
+                  style = "width: 60%; margin: 0 auto; background-color: #FF6F61; color: white;")
           )
         ),
         mainPanel(
@@ -341,7 +376,7 @@ server <- function(input, output, session) {
         if (input$mdz < 0) {
           updateNumericInput(session, "mdz", value = 0)
         } else if (input$mdz > 3) {
-          updateNumericInput(session, "mdz", value = 3)
+          updateNumericInput(session, "mdz", value = 10)
         }
       }
       
@@ -409,7 +444,9 @@ server <- function(input, output, session) {
       sft = input$sft,
       etdes = input$etdes,
       etsevo = input$etsevo,
-      bp_control = ifelse(input$bp_control %in% c("Not Needed", "Well Controlled"), 1, 0),
+      bp_control = ifelse(input$bp_control == "Not Needed", 0,
+                         ifelse(input$bp_control == "Well Controlled", 1,
+                                ifelse(input$bp_control == "Poorly Controlled", 2, 0))),
       ACEI = ifelse("ACEI" %in% input$medication, 1, 0),
       ARB = ifelse("ARB" %in% input$medication, 1, 0),
       LXP = ifelse("LXP" %in% input$medication, 1, 0),
@@ -682,6 +719,168 @@ server <- function(input, output, session) {
     shinyjs::click("submit_new")
     shinyjs::click("phenotype0")
   })
+
+    # Case 1 (Phenotype 0)
+    observeEvent(input$case1, {
+        updateNumericInput(session, "age", value = 56)
+        updateSelectInput(session, "sex", selected = "Male")
+        updateNumericInput(session, "bmi", value = 23.74)
+        updateNumericInput(session, "asa", value = 3)
+        updateSelectInput(session, "emop", selected = "NO")
+        updateSelectInput(session, "surgery_site", selected = "surgery_siteHead_and_Neck")
+        updateSelectInput(session, "have_vaso", selected = "NO")
+        updateNumericInput(session, "mdz", value = 2)
+        updateNumericInput(session, "ppf", value = 110)
+        updateNumericInput(session, "ppfi", value = 0)
+        updateNumericInput(session, "rfti", value = 3.75)
+        updateNumericInput(session, "sft", value = 20)
+        updateNumericInput(session, "etdes", value = 0)
+        updateNumericInput(session, "etsevo", value = 1.05)
+        updateSelectInput(session, "bp_control", selected = "Well Controlled")
+        updateCheckboxGroupInput(session, "medication", selected = character(0))
+        updateCheckboxGroupInput(session, "medical_history", 
+            selected = c("Essential_primary_hypertension", "Diabetes_mellitus", "Chronic_viral_hepatitis"))
+
+        # 自动触发 submit_new 按钮点击
+        shinyjs::click("submit_new")
+    })
+
+    # Case 2 (Phenotype 1)
+    observeEvent(input$case2, {
+        updateNumericInput(session, "age", value = 23)
+        updateSelectInput(session, "sex", selected = "Male")
+        updateNumericInput(session, "bmi", value = 19.59)
+        updateNumericInput(session, "asa", value = 2)
+        updateSelectInput(session, "emop", selected = "NO")
+        updateSelectInput(session, "surgery_site", selected = "surgery_siteSkin_and_Soft_Tissue")
+        updateSelectInput(session, "have_vaso", selected = "YES")
+        updateNumericInput(session, "mdz", value = 2)
+        updateNumericInput(session, "ppf", value = 130)
+        updateNumericInput(session, "ppfi", value = 0)
+        updateNumericInput(session, "rfti", value = 2.5)
+        updateNumericInput(session, "sft", value = 20)
+        updateNumericInput(session, "etdes", value = 0)
+        updateNumericInput(session, "etsevo", value = 0)
+        updateSelectInput(session, "bp_control", selected = "Not Needed")
+        updateCheckboxGroupInput(session, "medical_history", selected = character(0))
+
+        # 自动触发 submit_new 按钮点击
+        shinyjs::click("submit_new")
+    })
+
+    # Case 3 (Phenotype 2)
+    observeEvent(input$case3, {
+        updateNumericInput(session, "age", value = 84)
+        updateSelectInput(session, "sex", selected = "Female")
+        updateNumericInput(session, "bmi", value = 20.03)
+        updateNumericInput(session, "asa", value = 3)
+        updateSelectInput(session, "emop", selected = "NO")
+        updateSelectInput(session, "surgery_site", selected = "surgery_siteHead_and_Neck")
+        updateSelectInput(session, "have_vaso", selected = "YES")
+        updateNumericInput(session, "mdz", value = 2)
+        updateNumericInput(session, "ppf", value = 60)
+        updateNumericInput(session, "ppfi", value = 0)
+        updateNumericInput(session, "rfti", value = 2.5)
+        updateNumericInput(session, "sft", value = 25)
+        updateNumericInput(session, "etdes", value = 2.20)
+        updateNumericInput(session, "etsevo", value = 0.84)
+        updateSelectInput(session, "bp_control", selected = "Not Needed")
+        updateCheckboxGroupInput(session, "medication", selected = character(0))
+        updateCheckboxGroupInput(session, "medical_history", selected = character(0))
+
+        # 自动触发 submit_new 按钮点击
+        shinyjs::click("submit_new")
+    })
+
+    # Case 4 (Phenotype 3)
+    observeEvent(input$case4, {
+        updateNumericInput(session, "age", value = 84)
+        updateSelectInput(session, "sex", selected = "Female")
+        updateNumericInput(session, "bmi", value = 12.76)
+        updateNumericInput(session, "asa", value = 3)
+        updateSelectInput(session, "emop", selected = "NO")
+        updateSelectInput(session, "surgery_site", selected = "surgery_siteBones_and_Joints")
+        updateSelectInput(session, "have_vaso", selected = "YES")
+        updateNumericInput(session, "mdz", value = 10)
+        updateNumericInput(session, "ppf", value = 30)
+        updateNumericInput(session, "ppfi", value = 0)
+        updateNumericInput(session, "rfti", value = 0)
+        updateNumericInput(session, "sft", value = 15)
+        updateNumericInput(session, "etdes", value = 2.14)
+        updateNumericInput(session, "etsevo", value = 0)
+        updateSelectInput(session, "bp_control", selected = "Not Needed")
+        updateCheckboxGroupInput(session, "medication", selected = character(0))
+        updateCheckboxGroupInput(session, "medical_history", 
+            selected = c("Abnormalities_of_breathing", "Disorder_of_thyroid"))
+
+        # 自动触发 submit_new 按钮点击
+        shinyjs::click("submit_new")
+    })
+
+    # Case 5 (Phenotype 4)
+    observeEvent(input$case5, {
+        updateNumericInput(session, "age", value = 73)
+        updateSelectInput(session, "sex", selected = "Female")
+        updateNumericInput(session, "bmi", value = 17.58)
+        updateNumericInput(session, "asa", value = 2)
+        updateSelectInput(session, "emop", selected = "NO")
+        updateSelectInput(session, "surgery_site", selected = "surgery_siteBones_and_Joints")
+        updateSelectInput(session, "have_vaso", selected = "YES")
+        updateNumericInput(session, "mdz", value = 2)
+        updateNumericInput(session, "ppf", value = 50)
+        updateNumericInput(session, "ppfi", value = 0)
+        updateNumericInput(session, "rfti", value = 2.5)
+        updateNumericInput(session, "sft", value = 20)
+        updateNumericInput(session, "etdes", value = 0)
+        updateNumericInput(session, "etsevo", value = 1.44)
+        updateSelectInput(session, "bp_control", selected = "Well Controlled")
+        updateCheckboxGroupInput(session, "medication", selected = character(0))
+        updateCheckboxGroupInput(session, "medical_history", 
+            selected = c("Essential_primary_hypertension", "Diabetes_mellitus", "Chronic_kidney_disease_CKD"))
+
+        # 自动触发 submit_new 按钮点击
+        shinyjs::click("submit_new")
+    })
+
+    # 添加每个类别按钮的事件处理
+    observeEvent(input$class0, {
+      mbp_values <- c(91,96,82,77)
+      updateMBPInputs(session, c(mbp_values, rep(NA, 13 - length(mbp_values))))
+      shinyjs::click("submit")
+    })
+    
+    observeEvent(input$class1, {
+      mbp_values <- c(80, 70, 60, 65, 67, 66, 64, 66, 66, 67, 66, 66, 66)
+      updateMBPInputs(session, mbp_values)
+      shinyjs::click("submit")
+    })
+    
+    observeEvent(input$class2, {
+      mbp_values <- c(110,83,88,71,82,80,79,78,77,68,64)
+      updateMBPInputs(session, c(mbp_values, rep(NA, 13 - length(mbp_values))))
+      shinyjs::click("submit")
+    })
+    
+    observeEvent(input$class3, {
+      mbp_values <- c(99,83,63,66,65,82,94)
+      updateMBPInputs(session, c(mbp_values, rep(NA, 13 - length(mbp_values))))
+      shinyjs::click("submit")
+    })
+    
+    observeEvent(input$class4, {
+      mbp_values <- c(52,74,76,85,92,84,80)
+      updateMBPInputs(session, c(mbp_values, rep(NA, 13 - length(mbp_values))))
+      shinyjs::click("submit")
+    })
+    
+    # 添加辅助函数来更新所有MBP输入
+    updateMBPInputs <- function(session, values) {
+      for(i in 0:12) {
+        updateNumericInput(session, 
+                          paste0("mbp_input_", i*5), 
+                          value = values[i + 1])
+      }
+    }
 
 }
 
